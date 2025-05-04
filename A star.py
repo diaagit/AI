@@ -98,19 +98,17 @@ def print_solution(solution):
         print_board(step.board)
 
 # Function to get user input for the puzzle state
+
 def get_puzzle_state(prompt):
     while True:
         try:
-            input_state = input(prompt)
-            state = list(map(int, input_state.split()))
+            state = list(map(int, input(prompt).split()))
+            if sorted(state) == list(range(9)):
+                return state
+            print("Enter 9 distinct numbers from 0 to 8.")
+        except:
+            print("Invalid input. Use only numbers.")
 
-            if len(state) != 9 or not all(0 <= num <= 8 for num in state) or len(set(state)) != 9:
-                print("Invalid input. Please enter 9 distinct numbers from 0 to 8.")
-                continue
-
-            return state
-        except ValueError:
-            print("Invalid input. Please enter only numbers.")
 
 # Get initial and goal state from the user
 initial_state = get_puzzle_state("Enter the initial state as a space-separated list of 9 numbers (0 for blank space): ")
